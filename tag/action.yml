@@ -1,0 +1,27 @@
+name: "Tag Release"
+description: "Determine version with GitVersion and create/push a git tag"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v4.1.0
+      with:
+        versionSpec: '6.3.x'
+
+    - name: Determine Version
+      id: version
+      uses: gittools/actions/gitversion/execute@v4.1.0
+
+    # - name: Tag
+    #   shell: bash
+    #   run: |
+    #     git config user.name "github-actions[bot]"
+    #     git config user.email "github-actions[bot]@users.noreply.github.com"
+    #     git tag -a "v${{ steps.version.outputs.majorMinorPatch }}" \
+    #       -m "Version ${{ steps.version.outputs.majorMinorPatch }}"
+
+    # - name: Push
+    #   shell: bash
+    #   run: |
+    #     git push origin "v${{ steps.version.outputs.majorMinorPatch }}"
